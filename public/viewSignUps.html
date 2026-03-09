@@ -1,174 +1,185 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Q3 3rd Graded Exercise">
     <meta name="keywords" content="HTML Forms">
-    <meta name="author" content="Gabrielle Pascual">
+    <meta name="author" content="Victoria Sasha R. Meneses">
     <title>View Sign-Ups</title>
-   <style>
-    body {
-        background-color: #2b0d0d;
-        font-family: 'Poppins', sans-serif;
-        color: #f0e6e6;
-        margin: 0;
-        padding: 40px 0;
-        text-align: center;
-    }
 
-    h1 {
-        font-family: 'Orbitron', sans-serif;
-        color: #e63946;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 25px;
-        text-shadow: 3px 3px #1a0000;
-    }
-
-    label {
-        display: block;
-        text-align: left;
-        margin-bottom: 15px;
-        font-size: 0.95rem;
-        width: 680px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    select {
-        width: 100%;
-        padding: 8px;
-        margin-top: 6px;
-        background-color: #661919;
-        border: 2px solid #4d0000;
-        border-radius: 8px;
-        color: #f5e6e6;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    select:focus {
-        outline: none;
-        border-color: #e63946;
-        background-color: #732626;
-        box-shadow: 0 0 8px rgba(230,57,70,0.7);
-    }
-
-    table {
-        width: 680px;
-        margin: 20px auto;
-        border-collapse: collapse;
-        background-color: #3d0c0c;
-        border: 2px solid #4d0000;
-    }
-
-    th, td {
-        border: 2px solid #732626;
-        padding: 10px;
-    }
-
-    th {
-        background-color: #800000;
-        color: #fceaea;
-    }
-
-    button {
-        background-color: #800000;
-        color: #fceaea;
-        border: 2px solid #4d0000;
-        border-radius: 10px;
-        padding: 10px 20px;
-        margin: 5px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: transform 0.2s ease, background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #e63946;
-        transform: scale(1.05);
-    }
-</style>
-  </head>
-  <body>
-     <header>
-        <div>
-            <h1>
-                List of Students Who Signed-Up    
-            </h1>
-        </div>
-        <nav class="navbar">
-           <button type="button" id="signup"> Back to Sign-Ups </button>
-
-        </nav>
-        <br/>
-    </header>
-    <section>
-          <label> Select Your Club
-            <select id="clubs" onchange="showClub(this.value)">
-              <option disabled selected value> -- select an option -- </option>
-              <option value="All"> All </option>
-              <option value="Math Club"> Math Club </option>
-              <option value="Atom"> Atom </option>
-              <option value="Exposure"> Exposure </option>
-              <option value="Karyo Biomedical Society"> Karyo Biomedical Society </option>
-              <option value="PYHS"> PYHS </option>
-              <option value="Sagala"> Sagala </option>
-            </select>
-          </label> 
-          <p> Total Signup : <span id="tSignUps"> </span></p>
-    </section>
-    <section>
-
-      <table id="results"> </table>
-      
-    </section>
-    <script>
-    const signup = document.getElementById("signup");
-
-    signup.onclick = () => {
-        window.location.href = "Q3_3GRubidiumPascual.html";
-    }
-
-    function showClub(theClub) {
-        totalSignUp = 0; 
-        let signupString = localStorage.getItem("clubsignups")
-        if (!signupString) { 
-            rowString = "No Accounts Found" 
+    <style>
+        body {
+            background: #0d0f2b;
+            font-family: 'Poppins', sans-serif;
+            color: #f0e6e6;
+            text-align: center;
+            padding: 40px;
+            margin: 0;
         }
-        else {
-            signupsList = JSON.parse(signupString)
-            rowString = "";
-            results.innerHTML = "" 
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #3950e6;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px #00094d;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 6px;
+            background-color: #2e59aa;
+            border: 2px solid #3950e6;
+            border-radius: 6px;
+            color: #f0e6e6;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #3950e6;
+            background-color: #eef2ff;
+            color: #000;
+        }
+
+        table {
+            width: 650px;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #2e59aa;
+            border: 2px solid #3950e6;
+            color: #f0e6e6;
+        }
+
+        th,
+        td {
+            border: 1px solid #3950e6;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #3950e6;
+            color: #fceaea;
+        }
+
+        button {
+            background-color: #0f0080;
+            color: #fceaea;
+            border: 2px solid #00094d;
+            border-radius: 10px;
+            padding: 10px 20px;
+            margin: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3950e6;
+            transform: scale(1.05);
+        }
+
+        p {
+            font-size: 1rem;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>List of Students Who Signed-Up</h1>
+        <nav class="navbar">
+            <button type="button" id="signup">Back to Sign-Ups</button>
+        </nav>
+        <br />
+    </header>
+
+    <section>
+        <label>
+            Select Your Club
+            <select id="clubs" onchange="showClub(this.value)">
+                <option disabled selected value> -- select an option -- </option>
+                <option value="All">All</option>
+                <option value="Volant">Volant</option>
+                <option value="Alianti">Alianti</option>
+                <option value="Pallastro">Pallastro</option>
+                <option value="Kislap">Kislap</option>
+                <option value="Bake Club">Bake Club</option>
+            </select>
+        </label>
+
+        <p>Total Signups: <span id="tSignUps"></span></p>
+    </section>
+
+    <section>
+        <table id="results"></table>
+    </section>
+
+    <script>
+        const signup = document.getElementById("signup");
+        const results = document.getElementById("results");
+        const tSignUps = document.getElementById("tSignUps");
+
+        signup.onclick = () => {
+            window.location.href = "Q3_3GRubidiumPascual.html";
+        }
+
+        function showClub(theClub) {
+            let totalSignUp = 0;
+            let signupString = localStorage.getItem("signups");
+            let rowString = "";
+
+            if (!signupString) {
+                results.innerHTML = "No Sign-Ups Found";
+                tSignUps.innerHTML = "";
+                return;
+            }
+
+            let signupsList = JSON.parse(signupString);
+
             for (let key in signupsList) {
-                if (signupsList[key].clubs == theClub || theClub == 'All') {
+                if (signupsList[key].club == theClub || theClub == 'All') {
                     rowString += "<tr>";
-                    rowString += "<td>" + signupsList[key].clubs + "</td>";
-                    rowString += "<td>" + key + "</td>";
-                    rowString += "<td>" + signupsList[key].fname + "</td>";
-                    rowString += "<td>" + signupsList[key].grade + "</td>";
-                    rowString += "<td>" + signupsList[key].semail + "</td>";
-                    rowString += "<td>" + signupsList[key].phone + "</td>";
-                    rowString += "<td>" + signupsList[key].inex + "</td></tr>";
-                    totalSignUp++
+                    rowString += `<td>${signupsList[key].club}</td>`;
+                    rowString += `<td>${signupsList[key].studentID}</td>`;
+                    rowString += `<td>${signupsList[key].fullName}</td>`;
+                    rowString += `<td>${signupsList[key].grade}</td>`;
+                    rowString += `<td>${signupsList[key].email}</td>`;
+                    rowString += `<td>${signupsList[key].phone}</td>`;
+                    rowString += `<td>${signupsList[key].status}</td></tr>`;
+                    totalSignUp++;
                 }
+            }
+
+            if (rowString) {
+                rowString = "<tr><th>Club</th><th>ID</th><th>Fullname</th><th>Grade</th><th>Email</th><th>Mobile</th><th>Intern|Extern</th></tr>" + rowString;
+                results.innerHTML = rowString;
+                tSignUps.innerHTML = totalSignUp;
+            } else {
+                results.innerHTML = "No Sign-Ups for the club";
+                tSignUps.innerHTML = "";
             }
         }
 
-        if (rowString) {
-            rowString = "<tr><th>Club</th><th>ID</th><th>Fullname</th><th>Grade</th><th>Email</th><th>Mobile</th><th>Intern|Extern</th></tr>" + rowString;
-            results.innerHTML = rowString;
-            tSignUps.innerHTML = totalSignUp;
-        }
-        else {
-            results.innerHTML = "No Sign Ups for the club";
-            tSignUps.innerHTML = ""
-        }
-    }
-    
-    showClub('All')
-
+        showClub('All');
     </script>
-  </body>
+
+</body>
 </html>

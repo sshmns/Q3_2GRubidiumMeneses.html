@@ -142,22 +142,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-
 </head>
-
-<body>
-
-    <h1>Club Sign Up Form</h1>
-
-    <iframe name="hiddenFrame" style="display:none;"></iframe>
-
-    <form id="signupForm"
-        method="post"
-        action="submit"
-        target="hiddenFrame"
-        onsubmit="return saveSignup()"
-        onreset="return confirmReset()">
-
+  <body>
+    <section>
+      <h1 class="title">Sign-up Page <br/>
+        <button type="button" id="view"> View Sign-Ups </button>
+      </h1>
+      <form id="dForm" method="get">
         <fieldset>
 
             <legend>Student Information</legend>

@@ -1,276 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>HTML Sign Up Form</title>
+    <meta charset="UTF-8">
+    <title>HTML Sign Up Form</title>
 
-<style>
-    body {
-        background-color: #0d0f2b;
-        font-family: 'Poppins', sans-serif;
-        color: #f0e6e6;
-        margin: 0;
-        padding: 40px 0;
-        text-align: center;
-    }
+    <style>
 
-    h1 {
-        font-family: 'Orbitron', sans-serif;
-        color: #3394da;
-        letter-spacing: 2px;
-        text-transform: uppercase;
-        margin-bottom: 25px;
-        text-shadow: 3px 3px #1a0000;
-    }
-
-    form {
-        width: 680px;
-        margin: auto;
-        background-color: #2e59aa;
-        padding: 30px;
-        border-radius: 20px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.6);
-        border: 2px solid #2e59aa;
-    }
-
-    fieldset {
-        border: 2px solid #2e59aa;
-        border-radius: 15px;
-        padding: 20px;
-        margin-bottom: 25px;
-    }
-
-    legend {
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 1.8rem;
-        color: #b3e3ff;
-        padding: 0 10px;
-        text-shadow: 2px 2px rgb(19, 30, 154);
-    }
-
-    label {
-        display: block;
-        text-align: left;
-        margin-bottom: 15px;
-        font-size: 0.95rem;
-    }
-
-    input, select, textarea {
-        width: 100%;
-        padding: 8px;
-        margin-top: 6px;
-        background-color: #4162ba;
-        border: 2px solid #2e59aa;
-        border-radius: 8px;
-        color: #f5e6e6;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    textarea {
-        resize: vertical;
-    }
-
-    input:focus, select:focus, textarea:focus {
-        outline: none;
-        border-color: #231d7c;
-        background-color: #5d6bd5;
-        box-shadow: 0 0 8px rgba(45, 87, 150, 0.7);
-    }
-
-    .invalid {
-        border-color: #4d68b8;
-        background-color: #040080;
-    }
-
-    .radio-group {
-        display: flex;
-        gap: 25px;
-        margin-top: 8px;
-    }
-
-    .radio-group label {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        margin-bottom: 0;
-        cursor: pointer;
-    }
-
-    .radio-group input {
-        width: auto;
-        margin: 0;
-    }
-
-    .buttons {
-        text-align: center;
-        margin-top: 15px;
-    }
-
-    button {
-        background-color: #0f0080;
-        color: #fceaea;
-        border: 2px solid #00094d;
-        border-radius: 10px;
-        padding: 10px 20px;
-        margin: 5px;
-        font-family: 'Poppins', sans-serif;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: transform 0.2s ease, background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #3950e6;
-        transform: scale(1.05);
-    }
-</style>
-
-<script>
-    function confirmSubmit() {
-        return confirm("Are you sure you want to submit this form?");
-    }
-
-    function confirmReset() {
-        return confirm("Are you sure you want to reset all information?");
-    }
-
-    function checkEmpty(element) {
-        if (element.value.trim() === "") {
-            element.classList.add("invalid");
-        } else {
-            element.classList.remove("invalid");
-        }
-    }
-
-    function saveSignup(event) {
-        event.preventDefault();
-
-        if (!confirmSubmit()) {
-            return false;
+        body {
+            background: #0d0f2b;
+            font-family: Poppins, sans-serif;
+            color: #f0e6e6;
+            text-align: center;
+            padding: 40px;
         }
 
-        let signup = {
-            studentID: document.querySelector('[name="student_id"]').value,
-            fullName: document.querySelector('[name="full_name"]').value,
-            birthday: document.querySelector('[name="birthday"]').value,
-            email: document.querySelector('[name="email"]').value,
-            mobile: document.querySelector('[name="mobile"]').value,
-            grade: document.querySelector('[name="grade_level"]').value,
-            status: document.querySelector('input[name="status"]:checked').value,
-            club: document.querySelector('[name="club"]').value,
-            reason: document.querySelector('[name="reason"]').value
-        };
-
-        let signups = JSON.parse(localStorage.getItem("signups"));
-
-        if (!signups) {
-            signups = [];
+        form {
+            width: 650px;
+            margin: auto;
+            background: #2e59aa;
+            padding: 30px;
+            border-radius: 15px;
         }
 
-        signups.push(signup);
-        localStorage.setItem("signups", JSON.stringify(signups));
+        fieldset {
+            border: 2px solid #2e59aa;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
 
-        alert("Signup saved successfully!");
-        document.querySelector("form").reset();
-        return false;
-    }
+        label {
+            display: block;
+            text-align: left;
+            margin-bottom: 15px;
+        }
 
-    function goToView() {
-        window.location.href = "viewSignUps.html";
-    }
-</script>
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border: 2px solid #3950e6;
+            background: #eef2ff;
+            outline: none;
+        }
+
+        .invalid {
+            border: 2px solid red;
+            background: #ffecec;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            background-color: #0f0080;
+            color: #fceaea;
+            border: 2px solid #00094d;
+            border-radius: 10px;
+            padding: 10px 20px;
+            margin: 5px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3950e6;
+            transform: scale(1.05);
+        }
+
+    </style>
+
+    <script>
+
+        function confirmReset() {
+            return confirm("Are you sure you want to reset all information?");
+        }
+
+        function checkEmpty(el) {
+            if (el.value.trim() === "") {
+                el.classList.add("invalid");
+            } else {
+                el.classList.remove("invalid");
+            }
+        }
+
+        function saveSignup() {
+
+            if (!confirm("Are you sure you want to submit this application?")) {
+                return false;
+            }
+
+            let selected = document.querySelector("input[name='status']:checked");
+
+            if (!selected) {
+                alert("Please select Intern or Extern.");
+                return false;
+            }
+
+            let signup = {
+                studentID: document.getElementById("studentID").value,
+                fullName: document.getElementById("fullName").value,
+                birthday: document.getElementById("birthday").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("mobile").value,
+                grade: document.getElementById("gradeLevel").value,
+                status: selected.value,
+                club: document.getElementById("club").value,
+                reason: document.getElementById("reason").value
+            };
+
+            let signups = JSON.parse(localStorage.getItem("signups")) || [];
+
+            signups.push(signup);
+
+            localStorage.setItem("signups", JSON.stringify(signups));
+
+            alert("Application saved successfully!");
+
+            document.getElementById("signupForm").reset();
+
+            return true;
+        }
+
+    </script>
+
 </head>
 
 <body>
 
-<form method="post"
-      onsubmit="return saveSignup(event)"
-      onreset="return confirmReset()">
+    <h1>Club Application Form</h1>
 
-    <fieldset>
-        <legend>Information</legend>
+    <iframe name="hiddenFrame" style="display:none;"></iframe>
 
-        <label>
-            Student ID:
-            <input type="number" name="student_id" inputmode="numeric" step="1" required>
-        </label>
+    <form id="signupForm"
+        method="post"
+        action="submit"
+        target="hiddenFrame"
+        onsubmit="return saveSignup()"
+        onreset="return confirmReset()">
 
-        <label>
-            Full Name:
-            <input type="text" name="full_name" required onblur="checkEmpty(this)">
-        </label>
+        <fieldset>
 
-        <label>
-            Birthday:
-            <input type="date" name="birthday" required>
-        </label>
+            <legend>Student Information</legend>
 
-        <label>
-            Email Address:
-            <input type="email" name="email" required>
-        </label>
-    </fieldset>
+            <label>
+                Student ID
+                <input type="number" id="studentID" name="student_id" required>
+            </label>
 
-    <fieldset>
-        <legend>Details</legend>
+            <label>
+                Full Name
+                <input type="text" id="fullName" name="full_name" required onblur="checkEmpty(this)">
+            </label>
 
-        <label>
-            Mobile Phone:
-            <input type="text" name="mobile" required onblur="checkEmpty(this)">
-        </label>
+            <label>
+                Birthday
+                <input type="date" id="birthday" name="birthday" required>
+            </label>
 
-        <label>
-            Grade Level:
-            <select name="grade_level" required>
-                <option value="">Select</option>
-                <option value="g7">Grade 7</option>
-                <option value="g8">Grade 8</option>
-                <option value="g9">Grade 9</option>
-                <option value="g10">Grade 10</option>
-                <option value="g11">Grade 11</option>
-                <option value="g12">Grade 12</option>
-            </select>
-        </label>
+            <label>
+                Email Address
+                <input type="email" id="email" name="email" required>
+            </label>
 
-        <label>
-            Intern / Extern:
-            <div class="radio-group">
-                <label>
-                    <input type="radio" name="status" value="internal" required>
-                    Intern
-                </label>
-                <label>
-                    <input type="radio" name="status" value="external" required>
-                    Extern
-                </label>
-            </div>
-        </label>
+        </fieldset>
 
-        <label>
-            Preferred Organization / Club:
-            <select name="club" required>
-                <option value="">Select</option>
-                <option value="volant">Volant</option>
-                <option value="allianti">Alianti</option>
-                <option value="pallastro">Pallastro</option>
-                <option value="kislap">Kislap</option>
-                <option value="bakeclub">Bake Club</option>
-            </select>
-        </label>
+        <fieldset>
 
-        <label>
-            Why do you want to join?
-            <textarea name="reason" rows="4" required onblur="checkEmpty(this)"></textarea>
-        </label>
-    </fieldset>
+            <legend>Application Details</legend>
 
-    <div class="buttons">
+            <label>
+                Mobile Phone
+                <input type="text" id="mobile" name="mobile" required onblur="checkEmpty(this)">
+            </label>
+
+            <label>
+                Grade Level
+                <select id="gradeLevel" name="grade_level" required>
+                    <option value="">Select</option>
+                    <option value="g7">Grade 7</option>
+                    <option value="g8">Grade 8</option>
+                    <option value="g9">Grade 9</option>
+                    <option value="g10">Grade 10</option>
+                    <option value="g11">Grade 11</option>
+                    <option value="g12">Grade 12</option>
+                </select>
+            </label>
+
+            <label>
+                Intern / Extern:
+                <div class="radio-group">
+
+                    <label>
+                        <input type="radio" name="status" value="internal" required>
+                        Intern
+                    </label>
+
+                    <label>
+                        <input type="radio" name="status" value="external" required>
+                        Extern
+                    </label>
+
+                </div>
+            </label>
+
+            <label>
+                Preferred Organization / Club
+                <select id="club" name="club" required>
+
+                    <option value="">Select</option>
+                    <option value="volant">Volant</option>
+                    <option value="allianti">Alianti</option>
+                    <option value="pallastro">Pallastro</option>
+                    <option value="kislap">Kislap</option>
+                    <option value="bakeclub">Bake Club</option>
+
+                </select>
+            </label>
+
+            <label>
+                Why do you want to join?
+                <textarea id="reason" name="reason" rows="4" required onblur="checkEmpty(this)"></textarea>
+            </label>
+
+        </fieldset>
+
         <button type="submit">Submit</button>
         <button type="reset">Reset</button>
-        <button type="button" onclick="goToView()">View Signups</button>
-    </div>
 
-</form>
+    </form>
 
 </body>
+
 </html>

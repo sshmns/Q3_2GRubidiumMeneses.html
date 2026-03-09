@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HTML Form</title>
+
+<style>
+    body {
+        background-color: #0d0f2b;
+        font-family: 'Poppins', sans-serif;
+        color: #f0e6e6;
+        margin: 0;
+        padding: 40px 0;
+        text-align: center;
+    }
+
+    h1 {
+        font-family: 'Orbitron', sans-serif;
+        color: #3394da;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+        text-shadow: 3px 3px #1a0000;
+    }
+
+    form {
+        width: 680px;
+        margin: auto;
+        background-color: #2e59aa;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.6);
+        border: 2px solid #2e59aa;
+    }
+
+    fieldset {
+        border: 2px solid #2e59aa;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+
+    legend {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.8rem;
+        color: #b3e3ff;
+        padding: 0 10px;
+        text-shadow: 2px 2px rgb(19, 30, 154);
+    }
+
+    label {
+        display: block;
+        text-align: left;
+        margin-bottom: 15px;
+        font-size: 0.95rem;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 6px;
+        background-color: #4162ba;
+        border: 2px solid #2e59aa;
+        border-radius: 8px;
+        color: #f5e6e6;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    textarea {
+        resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        outline: none;
+        border-color: #231d7c;
+        background-color: #5d6bd5;
+        box-shadow: 0 0 8px rgba(45, 87, 150, 0.7);
+    }
+
+    .invalid {
+        border-color: #4d68b8;
+        background-color: #040080;
+    }
+
+    .radio-group {
+        display: flex;
+        gap: 25px;
+        margin-top: 8px;
+    }
+
+    .radio-group label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 0;
+        cursor: pointer;
+    }
+
+    .radio-group input {
+        width: auto;
+        margin: 0;
+    }
+
+    .buttons {
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    button {
+        background-color: #0f0080;
+        color: #fceaea;
+        border: 2px solid #00094d;
+        border-radius: 10px;
+        padding: 10px 20px;
+        margin: 5px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #3950e6;
+        transform: scale(1.05);
+    }
+</style>
+  </head>
+  <body>
+    <section>
+      <h1 class="title">Sign-up Page <br/>
+        <button type="button" id="view"> View Sign-Ups </button>
+      </h1>
+      <form id="dForm" method="get">
+        <fieldset>
+          <legend>Your Information</legend>
+          <label> Student ID: 
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="sid" id="sid" required />
+          </label>
+          <label> FullName :
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="fname" id="fname" required />
+          </label>
+          <label> Date Of Birth :
+            <input type="date" name="dob" id="dob" />
+          </label>
+          <label> Email :
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="email" name="semail" id="semail" required />
+          </label>
+          <label> Mobile Phone :
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="phone" id="phone" pattern="[0-9]{11}" placeholder="Type in your 11 digit Mobile Phone Number" required />
+          </label>
+          <label> Select Your Grade Level
+            <select name="grade">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="Grade 7"> Grade 7 </option>
+              <option value="Grade 8"> Grade 8 </option>
+              <option value="Grade 9"> Grade 9 </option>
+              <option value="Grade 10"> Grade 10 </option>
+              <option value="Grade 11"> Grade 11 </option>
+              <option value="Grade 12"> Grade 12 </option>
+            </select>
+          </label>
+          <label>Intern / Extern:
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="inex" value="Intern" /> Intern
+              </label>
+              <label>
+                <input type="radio" name="inex" value="Extern" /> Extern
+              </label>
+            </div>
+          </label>
+          <label> Select Your Club
+            <select name="clubs">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="Math Club"> Math Club </option>
+              <option value="Atom"> Atom </option>
+              <option value="Exposure"> Exposure </option>
+              <option value="Karyo Biomedical Society"> Karyo Biomedical Society </option>
+              <option value="PYHS"> PYHS </option>
+            </select>
+          </label>
+          <label> Why do you want to join : 
+            <textarea name="about" id="about"></textarea>
+          </label>
+        </fieldset>  
+        <fieldset>
+          <div class="buttons">
+            <button type="submit">Submit</button>
+            <button type="reset">Clear</button>
+          </div>
+        </fieldset> 
+      </form>
+    </section>
+  </body>
+</html>

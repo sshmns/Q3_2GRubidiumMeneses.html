@@ -89,58 +89,59 @@
     </style>
 
     <script>
+document.addEventListener("DOMContentLoaded", function () {
 
-        function confirmReset() {
-            return confirm("Are you sure you want to reset all information?");
+    const form = document.getElementById("dForm");
+    const resetBtn = document.querySelector("button[type='reset']");
+    const viewBtn = document.getElementById("view");
+
+    form.addEventListener("submit", function (event) {
+        if (!confirm("Are you sure you want to submit this form?")) {
+            event.preventDefault();
+            return;
         }
 
-        function checkEmpty(el) {
-            if (el.value.trim() === "") {
-                el.classList.add("invalid");
+        let signupString = localStorage.getItem("clubsignups");
+        let signupsList = signupString ? JSON.parse(signupString) : {};
+
+        let sid = document.getElementById("sid").value;
+
+        signupsList[sid] = {
+            fname: document.getElementById("fname").value,
+            grade: document.querySelector("select[name='grade']").value,
+            semail: document.getElementById("semail").value,
+            phone: document.getElementById("phone").value,
+            inex: document.querySelector("input[name='inex']:checked") ? 
+                  document.querySelector("input[name='inex']:checked").value : "",
+            clubs: document.querySelector("select[name='clubs']").value
+        };
+
+        localStorage.setItem("clubsignups", JSON.stringify(signupsList));
+    });
+
+    resetBtn.addEventListener("click", function (event) {
+        if (!confirm("Are you sure you want to reset all information?")) {
+            event.preventDefault();
+        }
+    });
+
+    viewBtn.addEventListener("click", function () {
+        window.location.href = "viewSignUps.html";
+    });
+
+    const inputs = document.querySelectorAll("input[required], textarea[required]");
+    inputs.forEach(function (input) {
+        input.addEventListener("blur", function () {
+            if (input.value.trim() === "") {
+                input.classList.add("invalid");
             } else {
-                el.classList.remove("invalid");
+                input.classList.remove("invalid");
             }
-        }
+        });
+    });
 
-        function saveSignup() {
-
-            if (!confirm("Are you sure you want to submit this application?")) {
-                return false;
-            }
-
-            let selected = document.querySelector("input[name='status']:checked");
-
-            if (!selected) {
-                alert("Please select Intern or Extern.");
-                return false;
-            }
-
-            let signup = {
-                studentID: document.getElementById("studentID").value,
-                fullName: document.getElementById("fullName").value,
-                birthday: document.getElementById("birthday").value,
-                email: document.getElementById("email").value,
-                phone: document.getElementById("mobile").value,
-                grade: document.getElementById("gradeLevel").value,
-                status: selected.value,
-                club: document.getElementById("club").value,
-                reason: document.getElementById("reason").value
-            };
-
-            let signups = JSON.parse(localStorage.getItem("signups")) || [];
-
-            signups.push(signup);
-
-            localStorage.setItem("signups", JSON.stringify(signups));
-
-            alert("Application saved successfully!");
-
-            document.getElementById("signupForm").reset();
-
-            return true;
-        }
-
-    </script>
+});
+</script>
 
 </head>
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HTML Form</title>
+<title>HTML Sign Up Form</title>
 
 <style>
     body {
@@ -124,72 +124,153 @@
         transform: scale(1.05);
     }
 </style>
-  </head>
-  <body>
-    <section>
-      <h1 class="title">Sign-up Page <br/>
-        <button type="button" id="view"> View Sign-Ups </button>
-      </h1>
-      <form id="dForm" method="get">
-        <fieldset>
-          <legend>Your Information</legend>
-          <label> Student ID: 
-            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="sid" id="sid" required />
-          </label>
-          <label> FullName :
-            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="fname" id="fname" required />
-          </label>
-          <label> Date Of Birth :
-            <input type="date" name="dob" id="dob" />
-          </label>
-          <label> Email :
-            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="email" name="semail" id="semail" required />
-          </label>
-          <label> Mobile Phone :
-            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="phone" id="phone" pattern="[0-9]{11}" placeholder="Type in your 11 digit Mobile Phone Number" required />
-          </label>
-          <label> Select Your Grade Level
-            <select name="grade">
-              <option disabled selected value> -- select an option -- </option>
-              <option value="Grade 7"> Grade 7 </option>
-              <option value="Grade 8"> Grade 8 </option>
-              <option value="Grade 9"> Grade 9 </option>
-              <option value="Grade 10"> Grade 10 </option>
-              <option value="Grade 11"> Grade 11 </option>
-              <option value="Grade 12"> Grade 12 </option>
+
+<script>
+    function confirmSubmit() {
+        return confirm("Are you sure you want to submit this form?");
+    }
+
+    function confirmReset() {
+        return confirm("Are you sure you want to reset all information?");
+    }
+
+    function checkEmpty(element) {
+        if (element.value.trim() === "") {
+            element.classList.add("invalid");
+        } else {
+            element.classList.remove("invalid");
+        }
+    }
+
+    function saveSignup(event) {
+        event.preventDefault();
+
+        if (!confirmSubmit()) {
+            return false;
+        }
+
+        let signup = {
+            studentID: document.querySelector('[name="student_id"]').value,
+            fullName: document.querySelector('[name="full_name"]').value,
+            birthday: document.querySelector('[name="birthday"]').value,
+            email: document.querySelector('[name="email"]').value,
+            mobile: document.querySelector('[name="mobile"]').value,
+            grade: document.querySelector('[name="grade_level"]').value,
+            status: document.querySelector('input[name="status"]:checked').value,
+            club: document.querySelector('[name="club"]').value,
+            reason: document.querySelector('[name="reason"]').value
+        };
+
+        let signups = JSON.parse(localStorage.getItem("signups"));
+
+        if (!signups) {
+            signups = [];
+        }
+
+        signups.push(signup);
+        localStorage.setItem("signups", JSON.stringify(signups));
+
+        alert("Signup saved successfully!");
+        document.querySelector("form").reset();
+        return false;
+    }
+
+    function goToView() {
+        window.location.href = "viewSignUps.html";
+    }
+</script>
+</head>
+
+<body>
+
+<form method="post"
+      onsubmit="return saveSignup(event)"
+      onreset="return confirmReset()">
+
+    <fieldset>
+        <legend>Information</legend>
+
+        <label>
+            Student ID:
+            <input type="number" name="student_id" inputmode="numeric" step="1" required>
+        </label>
+
+        <label>
+            Full Name:
+            <input type="text" name="full_name" required onblur="checkEmpty(this)">
+        </label>
+
+        <label>
+            Birthday:
+            <input type="date" name="birthday" required>
+        </label>
+
+        <label>
+            Email Address:
+            <input type="email" name="email" required>
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Details</legend>
+
+        <label>
+            Mobile Phone:
+            <input type="text" name="mobile" required onblur="checkEmpty(this)">
+        </label>
+
+        <label>
+            Grade Level:
+            <select name="grade_level" required>
+                <option value="">Select</option>
+                <option value="g7">Grade 7</option>
+                <option value="g8">Grade 8</option>
+                <option value="g9">Grade 9</option>
+                <option value="g10">Grade 10</option>
+                <option value="g11">Grade 11</option>
+                <option value="g12">Grade 12</option>
             </select>
-          </label>
-          <label>Intern / Extern:
+        </label>
+
+        <label>
+            Intern / Extern:
             <div class="radio-group">
-              <label>
-                <input type="radio" name="inex" value="Intern" /> Intern
-              </label>
-              <label>
-                <input type="radio" name="inex" value="Extern" /> Extern
-              </label>
+                <label>
+                    <input type="radio" name="status" value="internal" required>
+                    Intern
+                </label>
+                <label>
+                    <input type="radio" name="status" value="external" required>
+                    Extern
+                </label>
             </div>
-          </label>
-          <label> Select Your Club
+        </label>
+
+        <label>
+            Preferred Organization / Club:
             <select name="club" required>
                 <option value="">Select</option>
-                <option value="tech">Volant</option>
-                <option value="arts">Alianti</option>
-                <option value="sports">Pallastro</option>
-                <option value="music">Kislap</option>
-                <option value="volunteer">Bake Club</option>
+                <option value="volant">Volant</option>
+                <option value="allianti">Alianti</option>
+                <option value="pallastro">Pallastro</option>
+                <option value="kislap">Kislap</option>
+                <option value="bakeclub">Bake Club</option>
             </select>
-          </label>
-          <label> Why do you want to join : 
-            <textarea name="about" id="about"></textarea>
-          </label>
-        </fieldset>  
-        <fieldset>
-          <div class="buttons">
-            <button type="submit">Submit</button>
-            <button type="reset">Clear</button>
-          </div>
-        </fieldset> 
-      </form>
-    </section>
-  </body>
+        </label>
+
+        <label>
+            Why do you want to join?
+            <textarea name="reason" rows="4" required onblur="checkEmpty(this)"></textarea>
+        </label>
+    </fieldset>
+
+    <div class="buttons">
+        <button type="submit">Submit</button>
+        <button type="reset">Reset</button>
+        <button type="button" onclick="goToView()">View Signups</button>
+    </div>
+
+</form>
+
+</body>
 </html>

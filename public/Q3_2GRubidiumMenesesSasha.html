@@ -8,67 +8,63 @@
 <style>
 
 body{
-    background-color:#0d0f2b;
-    font-family:Poppins, sans-serif;
-    color:#f0e6e6;
-    text-align:center;
-    padding:40px;
+background:#0d0f2b;
+font-family:Poppins, sans-serif;
+color:#f0e6e6;
+text-align:center;
+padding:40px;
 }
 
 form{
-    width:650px;
-    margin:auto;
-    background:#2e59aa;
-    padding:30px;
-    border-radius:15px;
+width:650px;
+margin:auto;
+background:#2e59aa;
+padding:30px;
+border-radius:15px;
 }
 
 fieldset{
-    border:2px solid #2e59aa;
-    margin-bottom:20px;
-    padding:20px;
-}
-
-legend{
-    font-size:1.5rem;
+border:2px solid #2e59aa;
+margin-bottom:20px;
+padding:20px;
 }
 
 label{
-    display:block;
-    text-align:left;
-    margin-bottom:15px;
+display:block;
+text-align:left;
+margin-bottom:15px;
 }
 
-input, select, textarea{
-    width:100%;
-    padding:8px;
-    margin-top:5px;
-    border-radius:6px;
-    border:1px solid #ccc;
+input,select,textarea{
+width:100%;
+padding:8px;
+margin-top:5px;
+border-radius:6px;
+border:1px solid #ccc;
 }
 
-/* focus style required by teacher */
-input:focus, select:focus, textarea:focus{
-    border:2px solid #3950e6;
-    background-color:#eef2ff;
-    outline:none;
+/* focus style */
+input:focus,select:focus,textarea:focus{
+border:2px solid #3950e6;
+background:#eef2ff;
+outline:none;
 }
 
-/* style for empty fields */
+/* invalid style */
 .invalid{
-    border:2px solid red;
-    background:#ffecec;
-}
-
-button{
-    padding:10px 20px;
-    margin:5px;
-    cursor:pointer;
+border:2px solid red;
+background:#ffecec;
 }
 
 .radio-group{
-    display:flex;
-    gap:20px;
+display:flex;
+gap:20px;
+}
+
+button{
+padding:10px 20px;
+margin:5px;
+cursor:pointer;
 }
 
 </style>
@@ -76,57 +72,53 @@ button{
 <script>
 
 function confirmReset(){
-    return confirm("Are you sure you want to reset all information?");
+return confirm("Are you sure you want to reset all information?");
 }
 
-function checkEmpty(element){
-    if(element.value.trim()===""){
-        element.classList.add("invalid");
-    }else{
-        element.classList.remove("invalid");
-    }
+function checkEmpty(el){
+if(el.value.trim()===""){
+el.classList.add("invalid");
+}else{
+el.classList.remove("invalid");
+}
 }
 
-function saveSignup(event){
+function saveSignup(){
 
-    event.preventDefault();
+if(!confirm("Are you sure you want to submit this application?")){
+return false;
+}
 
-    if(!confirm("Are you sure you want to submit this application?")){
-        return false;
-    }
+let selected=document.querySelector("input[name='status']:checked");
 
-    let selectedStatus=document.querySelector("input[name='status']:checked");
+if(!selected){
+alert("Please select Intern or Extern.");
+return false;
+}
 
-    if(!selectedStatus){
-        alert("Please select Intern or Extern.");
-        return false;
-    }
+let signup={
+studentID:document.getElementById("studentID").value,
+fullName:document.getElementById("fullName").value,
+birthday:document.getElementById("birthday").value,
+email:document.getElementById("email").value,
+phone:document.getElementById("mobile").value,
+grade:document.getElementById("gradeLevel").value,
+status:selected.value,
+club:document.getElementById("club").value,
+reason:document.getElementById("reason").value
+};
 
-    let signup={
+let signups=JSON.parse(localStorage.getItem("signups")) || [];
 
-        studentID:document.getElementById("studentID").value,
-        fullName:document.getElementById("fullName").value,
-        birthday:document.getElementById("birthday").value,
-        email:document.getElementById("email").value,
-        phone:document.getElementById("mobile").value,
-        grade:document.getElementById("gradeLevel").value,
-        status:selectedStatus.value,
-        club:document.getElementById("club").value,
-        reason:document.getElementById("reason").value
+signups.push(signup);
 
-    };
+localStorage.setItem("signups",JSON.stringify(signups));
 
-    let signups=JSON.parse(localStorage.getItem("signups")) || [];
+alert("Application saved successfully!");
 
-    signups.push(signup);
+document.getElementById("signupForm").reset();
 
-    localStorage.setItem("signups",JSON.stringify(signups));
-
-    alert("Application saved successfully!");
-
-    document.getElementById("signupForm").reset();
-
-    return false;
+return true; 
 }
 
 </script>
@@ -137,10 +129,14 @@ function saveSignup(event){
 
 <h1>Club Application Form</h1>
 
+<!-- hidden iframe prevents redirect -->
+<iframe name="hiddenFrame" style="display:none;"></iframe>
+
 <form id="signupForm"
 method="post"
 action="submit"
-onsubmit="return saveSignup(event)"
+target="hiddenFrame"
+onsubmit="return saveSignup()"
 onreset="return confirmReset()">
 
 <fieldset>

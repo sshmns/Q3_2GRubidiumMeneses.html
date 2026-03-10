@@ -88,7 +88,7 @@
 
     </style>
 
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("dForm");
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 </script>
-</head>
+  </head>
   <body>
     <section>
       <h1 class="title">Sign-up Page <br/>
@@ -150,96 +150,64 @@ document.addEventListener("DOMContentLoaded", function () {
       </h1>
       <form id="dForm" method="get">
         <fieldset>
-
-            <legend>Student Information</legend>
-
-            <label>
-                Student ID
-                <input type="number" id="studentID" name="student_id" required>
-            </label>
-
-            <label>
-                Full Name
-                <input type="text" id="fullName" name="full_name" required onblur="checkEmpty(this)">
-            </label>
-
-            <label>
-                Birthday
-                <input type="date" id="birthday" name="birthday" required>
-            </label>
-
-            <label>
-                Email Address
-                <input type="email" id="email" name="email" required>
-            </label>
-
-        </fieldset>
-
+          <legend>Your Information</legend>
+          <label> Student ID: 
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="sid" id="sid" required />
+          </label>
+          <label> FullName :
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="fname" id="fname" required />
+          </label>
+          <label> Date Of Birth :
+            <input type="date" name="dob" id="dob" />
+          </label>
+          <label> Email :
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="email" name="semail" id="semail" required />
+          </label>
+          <label> Mobile Phone :
+            <input onfocus="changeColor(this)" onblur="resetColor(this)" type="text" name="phone" id="phone" pattern="[0-9]{11}" placeholder="Type in your 11 digit Mobile Phone Number" required />
+          </label>
+          <label> Select Your Grade Level
+            <select name="grade">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="Grade 7"> Grade 7 </option>
+              <option value="Grade 8"> Grade 8 </option>
+              <option value="Grade 9"> Grade 9 </option>
+              <option value="Grade 10"> Grade 10 </option>
+              <option value="Grade 11"> Grade 11 </option>
+              <option value="Grade 12"> Grade 12 </option>
+            </select>
+          </label>
+          <label>Intern / Extern:
+            <div class="radio-group">
+              <label>
+                <input type="radio" name="inex" value="Intern" /> Intern
+              </label>
+              <label>
+                <input type="radio" name="inex" value="Extern" /> Extern
+              </label>
+            </div>
+          </label>
+          <label> Select Your Club
+            <select name="clubs">
+              <option disabled selected value> -- select an option -- </option>
+              <option value="Volant"> Volant </option>
+              <option value="Alianti"> Alianti </option>
+              <option value="Pallastro"> Pallastro </option>
+              <option value="Kislap"> Kislap </option>
+              <option value="Bake Club"> Bake Club </option>
+            </select>
+          </label>
+          <label> Why do you want to join : 
+            <textarea name="about" id="about"></textarea>
+          </label>
+        </fieldset>  
         <fieldset>
-
-            <legend>Application Details</legend>
-
-            <label>
-                Mobile Phone
-                <input type="text" id="mobile" name="mobile" required onblur="checkEmpty(this)">
-            </label>
-
-            <label>
-                Grade Level
-                <select id="gradeLevel" name="grade_level" required>
-                    <option value="">Select</option>
-                    <option value="g7">Grade 7</option>
-                    <option value="g8">Grade 8</option>
-                    <option value="g9">Grade 9</option>
-                    <option value="g10">Grade 10</option>
-                    <option value="g11">Grade 11</option>
-                    <option value="g12">Grade 12</option>
-                </select>
-            </label>
-
-            <label>
-                Intern / Extern:
-                <div class="radio-group">
-
-                    <label>
-                        <input type="radio" name="status" value="internal" required>
-                        Intern
-                    </label>
-
-                    <label>
-                        <input type="radio" name="status" value="external" required>
-                        Extern
-                    </label>
-
-                </div>
-            </label>
-
-            <label>
-                Preferred Organization / Club
-                <select id="club" name="club" required>
-
-                    <option value="">Select</option>
-                    <option value="volant">Volant</option>
-                    <option value="allianti">Alianti</option>
-                    <option value="pallastro">Pallastro</option>
-                    <option value="kislap">Kislap</option>
-                    <option value="bakeclub">Bake Club</option>
-
-                </select>
-            </label>
-
-            <label>
-                Why do you want to join?
-                <textarea id="reason" name="reason" rows="4" required onblur="checkEmpty(this)"></textarea>
-            </label>
-
-        </fieldset>
-
-        <button type="submit">Submit</button>
-        <button type="reset">Reset</button>
-
-    </form>
-
-</body>
-
+          <div class="buttons">
+            <button type="submit">Submit</button>
+            <button type="reset">Clear</button>
+          </div>
+        </fieldset> 
+      </form>
+    </section>
+  </body>
 </html>

@@ -132,53 +132,51 @@
         <table id="results"></table>
     </section>
 
-    <script>
-        const signup = document.getElementById("signup");
-        const results = document.getElementById("results");
-        const tSignUps = document.getElementById("tSignUps");
+<script>
+    const signup = document.getElementById("signup");
 
-        signup.onclick = () => {
-            window.location.href = "Q3_3GRubidiumMenesesSasha.html";
+    signup.onclick = () => {
+        window.location.href = "Q3_3GRubidiumMenesesSasha.html";
+    }
+
+    function showClub(theClub) {
+        totalSignUp = 0; 
+        let signupString = localStorage.getItem("clubsignups")
+        if (!signupString) { 
+            rowString = "No Accounts Found" 
         }
-
-        function showClub(theClub) {
-            let totalSignUp = 0;
-            let signupString = localStorage.getItem("signups");
-            let rowString = "";
-
-            if (!signupString) {
-                results.innerHTML = "No Sign-Ups Found";
-                tSignUps.innerHTML = "";
-                return;
-            }
-
-            let signupsList = JSON.parse(signupString);
-
+        else {
+            signupsList = JSON.parse(signupString)
+            rowString = "";
+            results.innerHTML = "" 
             for (let key in signupsList) {
-                if (signupsList[key].club == theClub || theClub == 'All') {
+                if (signupsList[key].clubs == theClub || theClub == 'All') {
                     rowString += "<tr>";
-                    rowString += `<td>${signupsList[key].club}</td>`;
-                    rowString += `<td>${signupsList[key].studentID}</td>`;
-                    rowString += `<td>${signupsList[key].fullName}</td>`;
-                    rowString += `<td>${signupsList[key].grade}</td>`;
-                    rowString += `<td>${signupsList[key].email}</td>`;
-                    rowString += `<td>${signupsList[key].phone}</td>`;
-                    rowString += `<td>${signupsList[key].status}</td></tr>`;
-                    totalSignUp++;
+                    rowString += "<td>" + signupsList[key].clubs + "</td>";
+                    rowString += "<td>" + key + "</td>";
+                    rowString += "<td>" + signupsList[key].fname + "</td>";
+                    rowString += "<td>" + signupsList[key].grade + "</td>";
+                    rowString += "<td>" + signupsList[key].semail + "</td>";
+                    rowString += "<td>" + signupsList[key].phone + "</td>";
+                    rowString += "<td>" + signupsList[key].inex + "</td></tr>";
+                    totalSignUp++
                 }
             }
-
-            if (rowString) {
-                rowString = "<tr><th>Club</th><th>ID</th><th>Fullname</th><th>Grade</th><th>Email</th><th>Mobile</th><th>Intern|Extern</th></tr>" + rowString;
-                results.innerHTML = rowString;
-                tSignUps.innerHTML = totalSignUp;
-            } else {
-                results.innerHTML = "No Sign-Ups for the club";
-                tSignUps.innerHTML = "";
-            }
         }
 
-        showClub('All');
+        if (rowString) {
+            rowString = "<tr><th>Club</th><th>ID</th><th>Fullname</th><th>Grade</th><th>Email</th><th>Mobile</th><th>Intern|Extern</th></tr>" + rowString;
+            results.innerHTML = rowString;
+            tSignUps.innerHTML = totalSignUp;
+        }
+        else {
+            results.innerHTML = "No Sign Ups for the club";
+            tSignUps.innerHTML = ""
+        }
+    }
+
+    showClub('All')
+
     </script>
 
 </body>
